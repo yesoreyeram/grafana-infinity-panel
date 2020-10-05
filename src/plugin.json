@@ -1,0 +1,27 @@
+{
+    "$schema": "https://raw.githubusercontent.com/grafana/grafana/master/docs/sources/developers/plugins/plugin.schema.json",
+    "id": "yesoreyeram-infinity-panel",
+    "name": "Infinity Panel",
+    "type": "panel",
+    "dependencies": {
+        "grafanaDependency": ">7.0.0"
+    },
+    "info": {
+        "version": "%VERSION%",
+        "updated": "%TODAY%",
+        "description": "Do infinite things with grafana",
+        "author": {
+            "name": "Sriramajeyam Sugumaran",
+            "url": "https://www.google.com/search?q=Sriramajeyam+Sugumaran"
+        },
+        "logos": {
+            "small": "img/Infinity.png",
+            "large": "img/Infinity.png"
+        },
+        "keywords": [
+            "Infinity",
+            "Vega",
+            "Vega lite"
+        ]
+    }
+}

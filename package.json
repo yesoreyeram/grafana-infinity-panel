@@ -1,0 +1,37 @@
+{
+  "name": "grafana-infinity-panel",
+  "version": "0.1.0",
+  "description": "Grafana Infinity Panel",
+  "main": "index.js",
+  "scripts": {
+    "build": "grafana-toolkit plugin:build",
+    "test": "grafana-toolkit plugin:test",
+    "dev": "grafana-toolkit plugin:dev",
+    "watch": "grafana-toolkit plugin:dev --watch"
+  },
+  "dependencies": {
+    "@grafana/data": "7.1.5",
+    "@grafana/runtime": "7.1.5",
+    "@grafana/ui": "7.1.5",
+    "lodash": "^4.17.19",
+    "react-vega": "^7.4.1",
+    "vega": "^5.17.0",
+    "vega-lite": "^4.16.8",
+    "vega-tooltip": "^0.24.2"
+  },
+  "devDependencies": {
+    "@grafana/toolkit": "7.1.5",
+    "@types/lodash": "^4.14.149"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yesoreyeram/grafana-infinity-panel.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yesoreyeram/grafana-infinity-panel/issues"
+  },
+  "homepage": "https://github.com/yesoreyeram/grafana-infinity-panel#readme"
+}
