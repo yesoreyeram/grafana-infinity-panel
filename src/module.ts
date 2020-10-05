@@ -1,6 +1,6 @@
 import { PanelPlugin } from '@grafana/data';
 import { PanelOptions, PanelType, PanelTypes } from './types';
-import { Options as VegaPanelEditorOptions } from './panels/vega-lite';
+import { Options as VegaPanelEditorOptions } from './panels/vega';
 import { InfinityPanel } from './panel';
 
 export const plugin = new PanelPlugin<PanelOptions>(InfinityPanel).setPanelOptions(builder => {

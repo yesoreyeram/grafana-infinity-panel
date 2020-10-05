@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { PanelOptionsEditorItem } from '@grafana/data';
 import { Select, CodeEditor } from '@grafana/ui';
-import { VegaLite } from 'react-vega';
+import { Vega, VegaLite } from 'react-vega';
 import { Handler } from 'vega-tooltip';
-import { PanelOptions, PanelType, VegaLiteSettings, VegaTheme, VegaThemes } from './../types';
+import { PanelOptions, PanelType, VegaSettings, VegaTheme, VegaThemes } from '../types';
 
 const DEFAULT_VEGA_SPEC = {
   layer: [
@@ -46,8 +46,8 @@ const DEFAULT_VEGA_SPEC = {
 };
 
 interface EditorProps {
-  value: VegaLiteSettings;
-  onChange: (value: VegaLiteSettings) => void;
+  value: VegaSettings;
+  onChange: (value: VegaSettings) => void;
 }
 
 export const Editor: React.FC<EditorProps> = ({ value, onChange }) => {
@@ -92,18 +92,19 @@ export const Editor: React.FC<EditorProps> = ({ value, onChange }) => {
 };
 
 export const Options: PanelOptionsEditorItem = {
-  id: 'settings.vega_lite',
-  path: 'settings.vega_lite',
+  id: 'settings.vega',
+  path: 'settings.vega',
   name: 'Vega Panel Options',
   editor: Editor,
   defaultValue: {
     spec: null,
     theme: VegaTheme.Dark,
   },
-  showIf: (config: PanelOptions) => config.type === PanelType.VegaLite,
+  showIf: (config: PanelOptions) => config.type === PanelType.Vega || config.type === PanelType.VegaLite,
 };
 
 interface PanelProps {
+  vegaMode: 'vega' | 'vega-lite';
   options: PanelOptions;
   width: number;
   height: number;
@@ -113,10 +114,10 @@ interface PanelProps {
 
 export const Panel: React.FC<PanelProps> = props => {
   let options: PanelOptions = props.options;
-  let { width, height, data } = props;
-  let spec: any = options.settings.vega_lite.spec || DEFAULT_VEGA_SPEC;
+  let { width, height, data, vegaMode } = props;
+  let spec: any = options.settings.vega.spec || DEFAULT_VEGA_SPEC;
   spec.data = spec.data || { name: 'table' };
-  let theme = options.settings.vega_lite.theme;
+  let theme = options.settings.vega.theme;
   let expected_height = height - 50;
   let expected_width =
     width -
@@ -129,16 +130,30 @@ export const Panel: React.FC<PanelProps> = props => {
     (spec && spec.encoding && spec.encoding.y && spec.encoding.y.type === 'nominal' ? 0 : 0);
   return (
     <React.Fragment>
-      <VegaLite
-        width={spec.width || expected_width}
-        height={spec.height || expected_height}
-        padding={0}
-        spec={spec}
-        data={{ table: data }}
-        tooltip={new Handler().call}
-        actions={false}
-        theme={theme as any}
-      />
+      {vegaMode === 'vega' && (
+        <Vega
+          width={spec.width || expected_width}
+          height={spec.height || expected_height}
+          padding={spec.padding || 0}
+          spec={spec}
+          data={{ table: data }}
+          tooltip={new Handler().call}
+          actions={false}
+          theme={theme as any}
+        />
+      )}
+      {vegaMode === 'vega-lite' && (
+        <VegaLite
+          width={spec.width || expected_width}
+          height={spec.height || expected_height}
+          padding={0}
+          spec={spec}
+          data={{ table: data }}
+          tooltip={new Handler().call}
+          actions={false}
+          theme={theme as any}
+        />
+      )}
     </React.Fragment>
   );
 };

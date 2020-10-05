@@ -1,7 +1,11 @@
 export enum PanelType {
+  Vega = 'vega',
   VegaLite = 'vega-lite',
 }
-export const PanelTypes = [{ label: 'Vega Lite', value: PanelType.VegaLite }];
+export const PanelTypes = [
+  // { label: 'Vega', value: PanelType.Vega },
+  { label: 'Vega Lite', value: PanelType.VegaLite },
+];
 export enum VegaTheme {
   Dark = 'dark',
   Excel = 'excel',
@@ -24,13 +28,13 @@ export const VegaThemes = [
   { label: 'UrbanInstitute', value: VegaTheme.UrbanInstitute },
   { label: 'Vox', value: VegaTheme.Vox },
 ];
-export interface VegaLiteSettings {
+export interface VegaSettings {
   spec: any;
   theme: VegaTheme;
 }
 export interface PanelOptions {
   type: PanelType;
   settings: {
-    vega_lite: VegaLiteSettings;
+    vega: VegaSettings;
   };
 }
